@@ -5,13 +5,13 @@ using ControleGastos.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllers();
+// Configuração do banco SQLite.
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=controlegastos.db")
 );
+// Registro dos serviços da aplicação.
 builder.Services.AddScoped<IPersonService, PersonService>();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

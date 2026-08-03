@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace ControleGastos.Api.Controllers
 {
     [ApiController]
-    [Route ("api/[controller]")]
+    [Route("api/[controller]")]
     public class PeopleController : ControllerBase
     {
         private readonly IPersonService _personService;
-        public PeopleController (IPersonService personService)
+        public PeopleController(IPersonService personService)
         {
             _personService = personService;
         }

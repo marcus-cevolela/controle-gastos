@@ -17,7 +17,6 @@ public class PersonService : IPersonService
         _context = context;
     }
 
-
     /// <summary>
     /// Cria uma nova pessoa
     /// </summary>
@@ -53,7 +52,7 @@ public class PersonService : IPersonService
 
         if (person is null)
         {
-            throw new KeyNotFoundException ("Pessoa não encontrada");
+            throw new KeyNotFoundException("Pessoa não encontrada.");
         }
         
         _context.People.Remove(person);

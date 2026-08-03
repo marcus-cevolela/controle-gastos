@@ -1,17 +1,27 @@
 using ControleGastos.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using ControleGastos.Api.Services;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+// Configura o JSON para representar enums pelos nomes em vez de números.
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(
+            new JsonStringEnumConverter()
+        );
+    });
 // Configuração do banco SQLite.
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=controlegastos.db")
 );
+
 // Registro dos serviços da aplicação.
 builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

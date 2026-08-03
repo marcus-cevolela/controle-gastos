@@ -22,6 +22,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Registro dos serviços da aplicação.
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

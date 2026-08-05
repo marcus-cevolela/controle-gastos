@@ -62,5 +62,24 @@ export async function createPerson(personCreate: PersonCreate): Promise<Person> 
 }
 
 export async function deletePerson(id: number): Promise<void> {
+    try {
+        //envia um DELETE para apagar uma pessoa
+        const response = await fetch(`${API_URL}/api/People/${id}`, {
+            method: "DELETE",
+        });
 
+        //verifica se a API respondeu com sucesso
+        if (!response.ok) {
+            throw new Error("Erro ao apagar a pessoa.");
+        }
+
+    } catch (error) {
+        //registra as informações de erro
+        if (error instanceof Error) {
+            console.log(error.name);
+            console.log(error.message);
+        }
+        //repassa o erro para a página tratar
+        throw error;
+    }
 }

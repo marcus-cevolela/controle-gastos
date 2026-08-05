@@ -6,7 +6,7 @@ busca todas as pessoas cadastradas na API
 caso dê tudo certo retorna uma lista de pessoas, caso ocorra alguma falha lança um erro
 */
 export async function getPeople(): Promise<Person[]> {
-    try{
+    try {
         //envia um GET para obter todas as pessoas
         const response = await fetch(`${API_URL}/api/People`);
 
@@ -22,9 +22,9 @@ export async function getPeople(): Promise<Person[]> {
 
     } catch (error) {
         //registra as informações de erro
-        if (error instanceof Error){
-            console.log(error.name); 
-            console.log(error.message); 
+        if (error instanceof Error) {
+            console.log(error.name);
+            console.log(error.message);
         }
         //repassa o erro para a página tratar
         throw error;
@@ -32,7 +32,33 @@ export async function getPeople(): Promise<Person[]> {
 }
 
 export async function createPerson(personCreate: PersonCreate): Promise<Person> {
+    try {
+        //envia um POST para criar uma pessoa
+        const response = await fetch(`${API_URL}/api/People`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(personCreate)
+        });
 
+        //verifica se a API respondeu com sucesso
+        if (!response.ok) {
+            throw new Error("Erro ao criar a pessoa.");
+        }
+
+        //converte a resposta para um objeto pessoa
+        const data = await response.json() as Person;
+
+        return data;
+
+    } catch (error) {
+        //registra as informações de erro
+        if (error instanceof Error) {
+            console.log(error.name);
+            console.log(error.message);
+        }
+        //repassa o erro para a página tratar
+        throw error;
+    }
 }
 
 export async function deletePerson(id: number): Promise<void> {

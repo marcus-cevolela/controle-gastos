@@ -14,12 +14,26 @@ namespace ControleGastos.Api.Controllers
             _reportService = reportService;
         }
 
+        /// <summary>
+        /// Gera o relatório com os totais de cada pessoa e o total geral.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetReportAsync()
         {
             var report = await _reportService.GetReportAsync();
             return Ok(report);
         }
+
+        /// <summary>
+        /// Retorna o relatório financeiro detalhado de uma pessoa.
+        /// </summary>
+        [HttpGet("person/{personId}")]
+        public async Task<IActionResult> GetPersonReportAsync(int personId)
+        {
+            var personReport = await _reportService.GetPersonReportAsync(personId);
+            return Ok(personReport);
+        }
+
     }
 }
 

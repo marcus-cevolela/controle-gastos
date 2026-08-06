@@ -64,7 +64,7 @@ function Transactions() {
 
         //impede o cadastro de receitas para menores de idade
         if (person.age < 18 && type === TransactionType.Receita) {
-            alert("Não é possível cadastrar uma receita pra menores de idade");
+            alert("Não é possível cadastrar uma receita para menores de idade.");
             return;
         }
 

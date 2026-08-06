@@ -6,4 +6,5 @@ using System.Threading.Tasks;
 public interface IReportService
 {
     Task<ReportDto> GetReportAsync();
+    Task<PersonReportDto> GetPersonReportAsync(int personId);
 }

@@ -23,6 +23,18 @@ function People() {
         //impede a pagina de recarregar
         e.preventDefault();
 
+        //verifica se tem um nome válido
+        if (name.trim() === "") {
+            alert("Digite um nome.");
+            return;
+        }
+
+        //verifica se tem uma idade válida
+        if (age <= 0) {
+            alert("Digite uma idade válida.");
+            return;
+        }
+
         const person = {
             name,
             age
@@ -75,7 +87,8 @@ function People() {
                             <input
                                 id="age"
                                 type="number"
-                                value={age}
+                                min="0"
+                                value={age === 0 ? "" : age}
                                 onChange={(e) => { setAge(Number(e.target.value)) }}
                                 placeholder="Digite a idade da pessoa..."
                                 className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 rounded-lg h-11 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"

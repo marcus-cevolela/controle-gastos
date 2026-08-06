@@ -37,9 +37,34 @@ function Transactions() {
         //impede a pagina de recarregar
         e.preventDefault();
 
+        //verifica se tem uma descrição válida
+        if (description.trim() === "") {
+            alert("Digite uma descrição.");
+            return;
+        }
+
+        //verifica se tem um valor válido
+        if (value <= 0) {
+            alert("Digite um valor válido.");
+            return;
+        }
+
         //verifica se uma pessoa foi selecionada
         if (personId === 0) {
             alert("Selecione uma pessoa.");
+            return;
+        }
+
+        //procura a pessoa e verifica se ela existe
+        const person = people.find((p) => p.id === personId);
+        if (!person) {
+            alert("Pessoa não encontrada.")
+            return;
+        }
+
+        //impede o cadastro de receitas para menores de idade
+        if (person.age < 18 && type === TransactionType.Receita) {
+            alert("Não é possível cadastrar uma receita pra menores de idade");
             return;
         }
 
@@ -106,8 +131,9 @@ function Transactions() {
                                 type="number"
                                 step="0.01"
                                 min="0"
-                                value={value}
+                                value={value === 0 ? "" : value}
                                 onChange={(e) => { setValue(Number(e.target.value)) }}
+                                placeholder="Digite o valor da transação..."
                                 className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-400 rounded-lg h-11 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                         </div>
@@ -167,8 +193,8 @@ function Transactions() {
 
                                         {/* altera a cor do texto de acordo com o tipo da transação */}
                                         <p className={`text-sm font-semibold ${transaction.type === TransactionType.Receita
-                                                ? "text-green-500"
-                                                : "text-red-500"
+                                            ? "text-green-500"
+                                            : "text-red-500"
                                             }`}>{transaction.type}
                                         </p>
 

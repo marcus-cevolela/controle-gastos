@@ -187,7 +187,7 @@ function Transactions() {
                                 <div key={transaction.id} className="flex items-center justify-between rounded-xl border p-4 bg-slate-900 shadow-md my-2 hover:shadow-xl hover:border-blue-500 transition-all duration-200 hover:scale-[1.02]">
                                     <div>
 
-                                        <h3 className="font-semibold text-white">
+                                        <h3 className="font-semibold text-white capitalize">
                                             {transaction.description} - R$ {transaction.value.toFixed(2)}
                                         </h3>
 

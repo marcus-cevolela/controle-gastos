@@ -44,7 +44,7 @@ public class ReportService : IReportService
                 Name = person.Name,
                 TotalReceitas = totalReceitas,
                 TotalDespesas = totalDespesas,
-                Saldo = totalReceitas - totalDespesas   
+                Saldo = totalReceitas - totalDespesas  
             };
         })
         .ToList();
@@ -103,6 +103,7 @@ public class ReportService : IReportService
                 Description = transaction.Description,
                 Value = transaction.Value,
                 Type= transaction.Type, 
+                Id = transaction.Id,
             };
         })
         .ToList();

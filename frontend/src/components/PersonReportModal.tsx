@@ -31,15 +31,15 @@ function PersonReportModal({ isOpen, onClose, personReport, }: PersonReportModal
                     <hr className="mt-2 mb-3 border-slate-700" />
 
                     {/* infos da pessoa e resumo financeiro individual */}
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-col md:flex-row md:justify-between gap-4">
                         <div>
                             <h3 className="font-bold text-white text-2xl">{personReport.name}</h3>
                             <p className="text-xl text-gray-500 font-bold">{personReport.age} anos</p>
                         </div>
 
-                        <div className="flex flex-row gap-2">
+                        <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
 
-                            <div className="bg-slate-900 text-white rounded-2xl shadow-xl p-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl w-30 h-auto border border-green-500">
+                            <div className="bg-slate-900 text-white rounded-2xl shadow-xl p-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl w-full sm:w-30 h-auto border border-green-500">
                                 <h3 className="flex items-center justify-center gap-2 text-lg font-semibold">
                                     <TrendingUp size={20} className="text-green-500" />
                                     Receita
@@ -49,7 +49,7 @@ function PersonReportModal({ isOpen, onClose, personReport, }: PersonReportModal
                                 </p>
                             </div>
 
-                            <div className="bg-slate-900 text-white rounded-2xl shadow-xl p-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl w-30 h-auto border border-red-500">
+                            <div className="bg-slate-900 text-white rounded-2xl shadow-xl p-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl w-full sm:w-30 h-auto border border-red-500">
                                 <h3 className="flex items-center justify-center gap-2 text-lg font-semibold">
                                     <TrendingDown size={20} className="text-red-500" />
                                     Despesa
@@ -59,7 +59,7 @@ function PersonReportModal({ isOpen, onClose, personReport, }: PersonReportModal
                                 </p>
                             </div>
 
-                            <div className="bg-slate-900 text-white rounded-2xl shadow-xl p-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl w-30 h-auto border border-blue-500">
+                            <div className="bg-slate-900 text-white rounded-2xl shadow-xl p-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl w-full sm:w-30 h-auto border border-blue-500">
                                 <h3 className="flex items-center justify-center gap-2 text-lg font-semibold">
                                     <Wallet size={20} className="text-blue-500" />
                                     Saldo

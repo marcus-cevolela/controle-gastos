@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { getReport } from "../services/reportService";
 import type { Report } from "../interfaces/Report";
 import { Wallet, TrendingUp, TrendingDown, } from "lucide-react";
+import type { PersonReport } from "../interfaces/PersonReport";
+import { getReport, getPersonReport } from "../services/reportService";
+import PersonReportModal from "../components/PersonReportModal";
 
 function Report() {
     //estados
     const [report, setReport] = useState<Report | null>(null);
+    const [personReport, setPersonReport] = useState<PersonReport | null>(null);
+    const [modalOpen, setModalOpen] = useState(false);
 
     //carrega o relatório quando abre a página
     useEffect(() => {
@@ -15,6 +19,13 @@ function Report() {
         }
         loadReport();
     }, []);
+
+    //busca o relatorio individual e abre o modal
+    async function handleOpenPersonReport(personId: number) {
+        const resposta = await getPersonReport(personId);
+        setPersonReport(resposta);
+        setModalOpen(true);
+    }
 
     //enquanto o relátorio não carrega, exibe uma mensagem
     if (!report) {
@@ -33,6 +44,7 @@ function Report() {
                 <h1 className="text-center text-blue-500 text-2xl font-bold">Relatórios</h1>
                 <p className="text-center text-slate-400 mb-5">Visualize o resumo financeiro do sistema</p>
 
+                {/* resumo financeiro geral do sistema */}
                 <section className="grid grid-cols-1 md:grid-cols-3 gap-3 text-center mb-5">
 
                     <div className="bg-slate-900 text-white rounded-2xl shadow-xl p-8 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
@@ -60,6 +72,7 @@ function Report() {
                             <Wallet size={28} className="text-blue-500" />
                             Saldo
                         </h3>
+                        {/* saldo positivo fica verde e saldo negativo fica vermelho */}
                         <p
                             className={`mt-4 text-3xl font-bold ${report.saldoLiquido >= 0
                                 ? "text-green-500"
@@ -115,6 +128,13 @@ function Report() {
                                             <span className={`${person.saldo >= 0 ? "text-blue-500" : "text-red-500"
                                                 }`}>R$ {person.saldo.toFixed(2)}</span>
                                         </div>
+                                        
+                                        {/* abre o relatório financeiro detalhado da pessoa */}
+                                        <button
+                                            onClick={() => handleOpenPersonReport(person.id)}
+                                            className="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg py-2 transition-all duration-300 hover:scale-[1.02] cursor-pointer">
+                                            Ver relatório completo
+                                        </button>
 
                                     </div>
                                 </div>
@@ -125,7 +145,12 @@ function Report() {
 
 
             </div>
-
+            {/* modal reutilizável para exibir o relatório individual */}
+            <PersonReportModal
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                personReport={personReport}
+            />
         </main>
     );
 }

@@ -57,12 +57,14 @@ function People() {
 
     //remove uma pessoa cadastrada
     async function handleDeletePerson(id: number) {
+        //remove a pessoa da API
         await deletePerson(id);
+        //atualiza a lista de pessoas
         const resposta = await getPeople();
         setPeople(resposta);
     }
 
-    //abre o modal com o relatorio individual
+    //busca o relatorio individual e abre o modal
     async function handleOpenPersonReport(personId: number) {
         const resposta = await getPersonReport(personId);
         setPersonReport(resposta);
@@ -110,6 +112,7 @@ function People() {
                     </form>
                 </section>
 
+                {/* lista todas as pessoas cadastradas */}
                 <section>
                     <h2 className="text-center text-blue-500 text-2xl font-bold">Pessoas Cadastradas</h2>
 
@@ -118,6 +121,7 @@ function People() {
                             Nenhuma pessoa cadastrada.
                         </p>
                     ) : (
+                        //percorre todas as pessoas cadastradas e gera um card para cada
                         people.map((person) => (
                             <div key={person.id} className="flex items-center justify-between rounded-xl border p-4 bg-slate-900 shadow-md my-2 hover:shadow-xl hover:border-blue-500 transition-all duration-200 hover:scale-[1.02]">
                                 <div>
@@ -126,6 +130,7 @@ function People() {
                                 </div>
 
                                 <div className="flex flex-row gap-5">
+                                    {/* abre o relatório financeiro detalhado da pessoa */}
                                     <button onClick={() => handleOpenPersonReport(person.id)} className="bg-blue-500 px-3 py-2 text-white hover:bg-blue-600 rounded-xl w-20 h-20 font-bold transition-colors duration-500 cursor-pointer flex flex-col items-center justify-center gap-1 text-xs hover:scale-105"><FileText size={35} /> RELATÓRIO </button>
 
                                     <button onClick={() => handleDeletePerson(person.id)} className="bg-red-500 px-3 py-2 text-white hover:bg-red-600 rounded-xl w-20 h-20 font-bold transition-colors duration-500 cursor-pointer flex flex-col items-center justify-center gap-1 text-xs hover:scale-105"><Trash2 size={35} /> EXCLUIR </button>
@@ -137,7 +142,8 @@ function People() {
                 </section>
 
             </div>
-
+            
+            {/* modal reutilizável para exibir o relatório individual */}
             <PersonReportModal
                 isOpen={modalOpen}
                 onClose={() => setModalOpen(false)}

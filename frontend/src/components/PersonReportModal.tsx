@@ -2,6 +2,9 @@ import type { PersonReport } from "../interfaces/PersonReport";
 import { X, Wallet, TrendingUp, TrendingDown } from "lucide-react";
 import { TransactionType } from "../enums/TransactionType";
 
+/// <summary>
+/// Propriedades necessárias para exibir o modal de relatório individual.
+/// </summary>
 interface PersonReportModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -9,6 +12,7 @@ interface PersonReportModalProps {
 }
 
 function PersonReportModal({ isOpen, onClose, personReport, }: PersonReportModalProps) {
+    //não renderiza o modal se ele estiver fechado ou se não tiver um relatorio carregado
     if (!isOpen || !personReport) {
         return null;
     }
@@ -16,6 +20,7 @@ function PersonReportModal({ isOpen, onClose, personReport, }: PersonReportModal
     return (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center">
             <div className="rounded-xl border border-blue-500 p-6 bg-slate-900 shadow-md max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto">
+                {/* cabeçalho do modal */}
                 <div className=" flex justify-between items-center">
                     <h1 className="text-blue-500 text-2xl font-bold">Relatório Individual</h1>
                     <button onClick={onClose} className="bg-red-500 px-3 py-2 text-white hover:bg-red-600 rounded-xl w-10 h-10 font-bold transition-colors duration-500 cursor-pointer flex flex-col items-center justify-center hover:scale-105"><X size={28} /></button>
@@ -25,6 +30,7 @@ function PersonReportModal({ isOpen, onClose, personReport, }: PersonReportModal
                 <div className="mt-3">
                     <hr className="mt-2 mb-3 border-slate-700" />
 
+                    {/* infos da pessoa e resumo financeiro individual */}
                     <div className="flex justify-between items-center">
                         <div>
                             <h3 className="font-bold text-white text-2xl">{personReport.name}</h3>
@@ -71,12 +77,18 @@ function PersonReportModal({ isOpen, onClose, personReport, }: PersonReportModal
                     <h2 className="text-xl text-center font-bold text-blue-500">Transações</h2>
 
                     <div className="mt-3">
+                         {/* exibe uma mensagem caso não existam transações */}
                         {personReport.transactions.length === 0 ? (
                             <p className="text-center text-slate-400 mt-6">Nenhuma transação cadastrada.</p>
-                        ) : (personReport.transactions.map((transaction) => {
+                            
+                        ) : (
+                            //percorre todas as transações da pessoa e exibe no relatorio
+                            personReport.transactions.map((transaction) => {
                             return (
+                                //receita fica verde e despesa fica vermelho
                                 <div key={transaction.id} className={`flex justify-between items-center py-3 border-b border-slate-700 font-bold capitalize ${transaction.type === TransactionType.Receita ? "text-green-500" : "text-red-500"}`}>
                                     <p>{transaction.description}</p>
+                                    {/* receita recebe '+' e despesa recebe '-' */}
                                     <p>{transaction.type === TransactionType.Receita ? "+" : "-"} R$ {transaction.value.toFixed(2)}</p>
                                 </div>
                             );

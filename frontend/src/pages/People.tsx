@@ -123,17 +123,17 @@ function People() {
                     ) : (
                         //percorre todas as pessoas cadastradas e gera um card para cada
                         people.map((person) => (
-                            <div key={person.id} className="flex items-center justify-between rounded-xl border p-4 bg-slate-900 shadow-md my-2 hover:shadow-xl hover:border-blue-500 transition-all duration-200 hover:scale-[1.02]">
+                            <div key={person.id} className="flex items-center justify-between rounded-xl border p-3 md:p-4 bg-slate-900 shadow-md my-2 hover:shadow-xl hover:border-blue-500 transition-all duration-200 hover:scale-[1.02]">
                                 <div>
-                                    <h3 className="font-bold text-white text-xl">{person.name}</h3>
-                                    <p className="text-base text-gray-500">{person.age} anos</p>
+                                    <h3 className="font-bold text-white text-lg md:text-xl">{person.name}</h3>
+                                    <p className="text-sm md:text-base text-gray-500">{person.age} anos</p>
                                 </div>
 
                                 <div className="flex flex-row gap-5">
                                     {/* abre o relatório financeiro detalhado da pessoa */}
-                                    <button onClick={() => handleOpenPersonReport(person.id)} className="bg-blue-500 px-3 py-2 text-white hover:bg-blue-600 rounded-xl w-20 h-20 font-bold transition-colors duration-500 cursor-pointer flex flex-col items-center justify-center gap-1 text-xs hover:scale-105"><FileText size={35} /> RELATÓRIO </button>
+                                    <button onClick={() => handleOpenPersonReport(person.id)} className="bg-blue-500 px-2 py-2 text-white hover:bg-blue-600 rounded-xl w-16 h-16 md:w-20 md:h-20 font-bold transition-colors duration-500 cursor-pointer flex flex-col items-center justify-center gap-1 text-[10px] md:text-xs hover:scale-105"><FileText className="w-6 h-6 md:w-9 md:h-9" /> RELATÓRIO </button>
 
-                                    <button onClick={() => handleDeletePerson(person.id)} className="bg-red-500 px-3 py-2 text-white hover:bg-red-600 rounded-xl w-20 h-20 font-bold transition-colors duration-500 cursor-pointer flex flex-col items-center justify-center gap-1 text-xs hover:scale-105"><Trash2 size={35} /> EXCLUIR </button>
+                                    <button onClick={() => handleDeletePerson(person.id)}className="bg-red-500 px-2 py-2 text-white hover:bg-red-600 rounded-xl w-16 h-16 md:w-20 md:h-20 font-bold transition-colors duration-500 cursor-pointer flex flex-col items-center justify-center gap-1 text-[10px] md:text-xs hover:scale-105"><Trash2 className="w-6 h-6 md:w-9 md:h-9" /> EXCLUIR </button>
                                 </div>
 
                             </div>

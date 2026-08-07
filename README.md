@@ -204,23 +204,23 @@ Durante o desenvolvimento, optei por:
 
 ### Home
 
-![Home](image.png)
+![Home](images/image.png)
 
 ### Cadastro e Listagem de Pessoas
 
-![Cadastro de Pessoas](image-5.png)
+![Cadastro de Pessoas](images/image-5.png)
 
 ### Cadastro e Listagem de Transações
 
-![Cadastro de Transações](image-6.png)
+![Cadastro de Transações](images/image-6.png)
 
 ### Relatório Geral e Individual
 
-![Relatório Geral](image-7.png)
+![Relatório Geral](images/image-7.png)
 
 ### Relatório Individual Detalhado
 
-![Relatório Individual](image-8.png)
+![Relatório Individual](images/image-8.png)
 
 
 ---
